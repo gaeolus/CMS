@@ -6,24 +6,27 @@ import org.resl.gs1.cms.model.Slave;
 public class Persist {
 	// JDBC driver name and database URL
 	static String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	static String DB_URL = "jdbc:mysql://localhost:9999/cms";
-	static String DB_URL2 = "jdbc:mysql://localhost:9999/";
+	static String DB_URL = "jdbc:mysql://localhost/cms";
+	static String DB_URL2 = "jdbc:mysql://localhost/";
 
 	//  Database credentials
 	static String USER = "root";
-	static String PASS = "resl18519";
+	static String PASS = "root";
 	
-	/*public Persist(){
+	public Persist(){
 		try{
 			InetAddress IP=InetAddress.getLocalHost();
 			if (IP.getHostAddress().equals("192.168.0.2")){
+				DB_URL = "jdbc:mysql://localhost:9999/cms";
+				DB_URL2 = "jdbc:mysql://localhost:9999/";
+				
 				USER = "root";
 				PASS = "resl18519";
 			}
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-	}*/
+	}
 
 	public void updateIdStatus(int id){
 
