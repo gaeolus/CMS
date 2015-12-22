@@ -11,10 +11,10 @@ public class Test {
 		//persist.dropeDatabase();
 		//persist.createDatabase();
 		//persist.createTbales();
-		persist.updateIdStatus(0);
-		int x=100;
-		x=persist.selectFromIdStatus();
-		System.out.println("Result = " + x);
+		//persist.updateIdStatus(0);
+		//int x=100;
+		//x=persist.selectFromIdStatus();
+		//System.out.println("Result = " + x);
 		System.out.println("Test End");
 
 	}

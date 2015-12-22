@@ -7,13 +7,13 @@ public class Conf {
 	public static void main(String[] args) {
 		Persist persist=new Persist();
 		//persist.dropeDatabase();
-		//persist.createDatabase();
-		//persist.createTbales();
+		persist.createDatabase();
+		persist.createTbales();
 		Account account=new Account();
-		account.setId("Test id");
-		account.setBizLocation("TestBiz");
-		account.setWritePoint("TestWrie");
-		persist.insertIntoSlave(account);
+		//account.setId("Test id");
+		//account.setBizLocation("TestBiz");
+		//account.setWritePoint("TestWrie");
+		//persist.insertIntoSlave(account);
 		System.out.println("Config End!");
 
 	}

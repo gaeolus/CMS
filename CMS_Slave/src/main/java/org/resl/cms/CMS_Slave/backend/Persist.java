@@ -6,12 +6,12 @@ import org.resl.cms.CMS_Slave.model.Account;
 public class Persist {
     // JDBC driver name and database URL
        static final String JDBC_DRIVER = "com.mysql.jdbc.Driver"; 
-       static final String DB_URL = "jdbc:mysql://localhost/cms_slave";
-       static final String DB_URL2 = "jdbc:mysql://localhost/";
+       static final String DB_URL = "jdbc:mysql://localhost:9999/cms_slave";
+       static final String DB_URL2 = "jdbc:mysql://localhost:9999/";
 
        //  Database credentials
        static final String USER = "root";
-       static final String PASS = "";
+       static final String PASS = "resl18519";
       
        public void insertIntoSlave(Account account){
            
