@@ -157,6 +157,61 @@ public class Persist {
 		}
 
 	}
+	public void insertIntoKeyType(String type, int companyPrefix, int ref){
+
+		Connection conn = null;
+		Statement stmt = null;
+		try{
+			//STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			System.out.println("Creating statement...");
+			stmt = conn.createStatement();
+			String sql;
+			
+			sql = "Select * from keyType where type='"+type+"' and companyPrefix="+companyPrefix+" and ref="+ref;
+			
+			stmt.execute(sql);
+			ResultSet rs=stmt.getResultSet();
+			
+			int row=0;
+			if(rs.last()){
+				row=rs.getRow();
+			}
+			
+			if(row == 0){
+				//type varchar(100),companyPrefix int, ref int, assigned int
+				sql = "insert into keyType (type, companyPrefix, ref, assigned)  values('"+type+"', "+companyPrefix+", "+ref+", "+0+")";
+
+				stmt.executeUpdate(sql);
+				System.out.println("Gitin inserted");
+			}
+			
+			
+			stmt.close();
+			conn.close();
+		}catch(SQLException se){
+			//Handle errors for JDBC
+			se.printStackTrace();
+		}catch(Exception e){
+			//Handle errors for Class.forName
+			e.printStackTrace();
+		}finally{
+			//finally block used to close resources
+			try{
+				if(stmt!=null)
+					stmt.close();
+			}catch(SQLException se2){
+			}// nothing we can do
+			try{
+				if(conn!=null)
+					conn.close();
+			}catch(SQLException se){
+				se.printStackTrace();
+			}//end finally try
+		}
+
+	}
 	public void test(){
 		Connection conn = null;
 		Statement stmt = null;
@@ -216,7 +271,7 @@ public class Persist {
 		}//end try
 	}
 
-	public void dropTbales(){
+	public void dropTables(){
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -289,7 +344,7 @@ public class Persist {
 					+ "reqIp varchar(100), reqTime  TIMESTAMP)";
 			stmt.executeUpdate(sql);
 			sql = "CREATE TABLE keyType (id int AUTO_INCREMENT PRIMARY KEY, "
-					+ "type varchar(100), keyStart varchar(100),keyEnd varchar(100), keyLeft int)";
+					+ "type varchar(100),companyPrefix int, ref int, assigned int)";
 			stmt.executeUpdate(sql);
 			stmt.close();
 			conn.close();

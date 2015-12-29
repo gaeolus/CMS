@@ -8,9 +8,10 @@ public class Test {
 		Persist persist=new Persist();
 		//persist.test();
 		//persist.dropTbales();
-		//persist.dropeDatabase();
+		//persist.dropDatabase();
 		//persist.createDatabase();
-		//persist.createTbales();
+		//persist.createTables();
+		persist.insertIntoKeyType("gtin", 12, 1201);
 		//persist.updateIdStatus(0);
 		//int x=100;
 		//x=persist.selectFromIdStatus();
