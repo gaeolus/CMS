@@ -86,4 +86,41 @@ public class SystemOverviewController {
 			alert.showAndWait();
 		}
 	}
+	
+	/**
+	 * Called when the user clicks the new button. Opens a dialog to edit
+	 * details for a new person.
+	 */
+	@FXML
+	private void handleNewCode() {
+	    GS1Code tempCode = new GS1Code();
+	    boolean okClicked = mainApp.showCodeEditDialog(tempCode);
+	    if (okClicked) {
+	        mainApp.getCodeData().add(tempCode);
+	    }
+	}
+
+	/**
+	 * Called when the user clicks the edit button. Opens a dialog to edit
+	 * details for the selected person.
+	 */
+	@FXML
+	private void handleEditCode() {
+	    GS1Code selectedCode = systemTable.getSelectionModel().getSelectedItem();
+	    if (selectedCode != null) {
+	        boolean okClicked = mainApp.showCodeEditDialog(selectedCode);
+	        if (okClicked) {
+	        }
+
+	    } else {
+	        // Nothing selected.
+	        Alert alert = new Alert(AlertType.WARNING);
+	        alert.initOwner(mainApp.getPrimaryStage());
+	        alert.setTitle("No Selection");
+	        alert.setHeaderText("No Code Selected");
+	        alert.setContentText("Please select a code in the table.");
+
+	        alert.showAndWait();
+	    }
+	}
 }
