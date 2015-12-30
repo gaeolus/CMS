@@ -18,7 +18,7 @@ public class Register {
 	@Path("{bizLocation}/{writePoint}")
 	@GET
 	@Produces("application/json")
-	public RegResponse registerSlave(@PathParam("bizLocation") String bizLocation,@PathParam("c") String writePoint) {
+	public RegResponse registerSlave(@PathParam("bizLocation") String bizLocation,@PathParam("writePoint") String writePoint) {
 		Persist persist=new Persist();
 		int intRes=persist.selectFromIdStatus();
 		intRes++;

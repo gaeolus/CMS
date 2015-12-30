@@ -2,10 +2,12 @@ package org.resl.cms.CMS_Slave.Configuration;
 
 import java.util.logging.Logger;
 
+import org.resl.cms.CMS_Slave.model.KeyType;
+
 public class Configuration {
 	
-	public static String  ip ="143.248.55.139";
-	public static String port = "8787";
+	public static String  ip ="192.168.56.1";
+	public static String port = "8080";
 	public static String bizLocation = "bizLocation1";
 	public static String writePoint = "writePoint";
 	public static String id = "id";
@@ -15,19 +17,13 @@ public class Configuration {
 	
 	
 	public Configuration(){
-		ip ="143.248.55.139";
-		port = "8787";
+		ip ="192.168.56.1";
+		port = "8080";
 		bizLocation = "bizLocation1";
 		writePoint = "writePoint";
 		setLogger(logger);
 	}
-	public void configure(String  ip_n,String port_n, String bizLocation_n, String writePoint_n){
-		ip =ip_n;
-		port = port_n;
-		bizLocation = bizLocation_n;
-		writePoint = writePoint_n;
-		configured=true;
-	}
+
 	
 	public static String getBizLocation() {
 		return bizLocation;

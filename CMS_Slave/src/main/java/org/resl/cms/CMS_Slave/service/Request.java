@@ -5,10 +5,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import org.resl.cms.CMS_Slave.Configuration.Configuration;
 import org.resl.cms.CMS_Slave.backend.Persist;
 import org.resl.cms.CMS_Slave.model.Account;
+import org.resl.cms.CMS_Slave.model.KeyResponse;
 import org.resl.cms.CMS_Slave.model.RegResponse;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -30,6 +33,20 @@ public class Request {
 		Persist persist=new Persist();
 		persist.insertIntoSlave(account);
 		return account;
+		
+	}
+	
+	public KeyResponse keyRequest (String id, String keyType, int companyPrefix, int ref, int range) throws JsonParseException, JsonMappingException, IOException{
+		
+		String urlStr="http://"+Configuration.ip+":"+Configuration.port+
+				"/CMS/service/keyRequest/"+id+"/"+keyType+"/"+companyPrefix+"/"+ref+"/"+range;	
+		String result=getQueryResult(urlStr);
+		KeyResponse KeyResponse = new ObjectMapper().readValue(result, KeyResponse.class);
+		Persist persist=new Persist();
+		Date date=new Date();
+		Timestamp time=new Timestamp(date.getTime());
+		persist.insertIntoGeneralLog(KeyResponse.getFrom(), KeyResponse.getTo(), time);
+		return KeyResponse;
 		
 	}
 	

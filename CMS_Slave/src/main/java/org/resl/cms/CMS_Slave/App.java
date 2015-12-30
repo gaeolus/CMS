@@ -17,12 +17,13 @@ public class App
 {
     public static void main( String[] args ) throws JsonParseException, JsonMappingException, IOException
     {
-    	Account account=new Account();
+//    	Account account=new Account();
     	Request request= new Request();
-    	Configuration conf= new Configuration();
-    	account=request.register();
-    	System.out.println(account.getId());
+//    	Configuration conf= new Configuration();
+//    	account=request.register();
+//    	System.out.println(account.getId());
     	//Configuration.logger.info(account.getId());
+    	request.keyRequest("12", "gtin", 120, 1201, 77);
         System.out.println( "Program End!" );
     }
     

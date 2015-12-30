@@ -157,6 +157,105 @@ public class Persist {
 		}
 
 	}
+	public int selectFromKeyType(String type, int companyPrefix, int ref){
+        int assigned=-1;
+		Connection conn = null;
+		Statement stmt = null;
+		try{
+			//STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			stmt = conn.createStatement();
+			String sql;
+			
+			sql = "Select * from keyType where type='"+type+"' and companyPrefix="+companyPrefix+" and ref="+ref;
+			
+			stmt.execute(sql);
+			ResultSet rs=stmt.getResultSet();
+			while (rs.next ()){
+				assigned=rs.getInt("assigned");
+			}
+			
+				
+			
+			stmt.close();
+			conn.close();
+		}catch(SQLException se){
+			//Handle errors for JDBC
+			se.printStackTrace();
+		}catch(Exception e){
+			//Handle errors for Class.forName
+			e.printStackTrace();
+		}finally{
+			//finally block used to close resources
+			try{
+				if(stmt!=null)
+					stmt.close();
+			}catch(SQLException se2){
+			}// nothing we can do
+			try{
+				if(conn!=null)
+					conn.close();
+			}catch(SQLException se){
+				se.printStackTrace();
+			}//end finally try
+		}
+		return assigned;
+
+	}
+	public void updateKeyType(String type, int companyPrefix, int ref, int assigned){
+        
+		Connection conn = null;
+		Statement stmt = null;
+		try{
+			//STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			stmt = conn.createStatement();
+			String sql;
+			
+			sql = "Select * from keyType where type='"+type+"' and companyPrefix="+companyPrefix+" and ref="+ref;
+			
+			stmt.execute(sql);
+			ResultSet rs=stmt.getResultSet();
+			int row=0;
+			if(rs.last()){
+				row=rs.getRow();
+			}
+			
+			if(row > 0){
+				//type varchar(100),companyPrefix int, ref int, assigned int
+				sql = "update keyType set assigned="+assigned+" where type='"+type+"' and companyPrefix="+companyPrefix+" and ref="+ref;
+
+				stmt.executeUpdate(sql);
+				System.out.println("updated");
+			}
+				
+			
+			stmt.close();
+			conn.close();
+		}catch(SQLException se){
+			//Handle errors for JDBC
+			se.printStackTrace();
+		}catch(Exception e){
+			//Handle errors for Class.forName
+			e.printStackTrace();
+		}finally{
+			//finally block used to close resources
+			try{
+				if(stmt!=null)
+					stmt.close();
+			}catch(SQLException se2){
+			}// nothing we can do
+			try{
+				if(conn!=null)
+					conn.close();
+			}catch(SQLException se){
+				se.printStackTrace();
+			}//end finally try
+		}
+
+	}
 	public void insertIntoKeyType(String type, int companyPrefix, int ref){
 
 		Connection conn = null;
@@ -184,7 +283,164 @@ public class Persist {
 				sql = "insert into keyType (type, companyPrefix, ref, assigned)  values('"+type+"', "+companyPrefix+", "+ref+", "+0+")";
 
 				stmt.executeUpdate(sql);
-				System.out.println("Gitin inserted");
+				System.out.println("gtin inserted");
+			}
+			
+			
+			stmt.close();
+			conn.close();
+		}catch(SQLException se){
+			//Handle errors for JDBC
+			se.printStackTrace();
+		}catch(Exception e){
+			//Handle errors for Class.forName
+			e.printStackTrace();
+		}finally{
+			//finally block used to close resources
+			try{
+				if(stmt!=null)
+					stmt.close();
+			}catch(SQLException se2){
+			}// nothing we can do
+			try{
+				if(conn!=null)
+					conn.close();
+			}catch(SQLException se){
+				se.printStackTrace();
+			}//end finally try
+		}
+
+	}
+	
+	//"CREATE TABLE assignment (id int AUTO_INCREMENT PRIMARY KEY, "
+	//+ "slaveId varchar(100),type varchar(100), idFrom varchar(100), idTo varchar(100),"
+	//+ "reqIp varchar(100), reqTime  TIMESTAMP)";
+	
+	public void insertIntoAssignment(String slaveId, String type, String idFrom,  String idTo, String reqIp, Timestamp reqTime ){
+
+		Connection conn = null;
+		Statement stmt = null;
+		try{
+			//STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			System.out.println("Creating statement...");
+			stmt = conn.createStatement();
+			String sql;
+			
+			
+			sql = "insert into assignment (slaveId, type, idFrom, idTo, reqIp, reqTime)  "
+					+ "values('"+slaveId+"','"+type+"', '"+idFrom+"', '"+idTo+"','"+reqIp+"', '"+reqTime+"')";
+
+			stmt.executeUpdate(sql);
+			System.out.println("assignment inserted");
+				
+			
+			stmt.close();
+			conn.close();
+		}catch(SQLException se){
+			//Handle errors for JDBC
+			se.printStackTrace();
+		}catch(Exception e){
+			//Handle errors for Class.forName
+			e.printStackTrace();
+		}finally{
+			//finally block used to close resources
+			try{
+				if(stmt!=null)
+					stmt.close();
+			}catch(SQLException se2){
+			}// nothing we can do
+			try{
+				if(conn!=null)
+					conn.close();
+			}catch(SQLException se){
+				se.printStackTrace();
+			}//end finally try
+		}
+
+	}
+	public String selectFromAssignment(){
+        String result="";
+		Connection conn = null;
+		Statement stmt = null;
+		try{
+			//STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			stmt = conn.createStatement();
+			String sql;
+			
+			sql = "Select * from assignment";
+			
+			stmt.execute(sql);
+			ResultSet rs=stmt.getResultSet();//(slaveId, type, idFrom, idTo, reqIp, reqTime) 
+			while (rs.next ()){
+				result+= String.format("%-15s", rs.getString("slaveId"));
+				result+= String.format("%-7s", rs.getString("type"));
+				result+= String.format("%-35s", rs.getString("idFrom"));
+				result+= String.format("%-35s", rs.getString("idTo"));
+				result+= String.format("%-15s", rs.getString("reqIp"));
+				result+= String.format("%-15s", rs.getTimestamp("reqTime"));
+				result+="\n";
+				//assigned=rs.getInt("assigned");
+			}
+			
+				
+			
+			stmt.close();
+			conn.close();
+		}catch(SQLException se){
+			//Handle errors for JDBC
+			se.printStackTrace();
+		}catch(Exception e){
+			//Handle errors for Class.forName
+			e.printStackTrace();
+		}finally{
+			//finally block used to close resources
+			try{
+				if(stmt!=null)
+					stmt.close();
+			}catch(SQLException se2){
+			}// nothing we can do
+			try{
+				if(conn!=null)
+					conn.close();
+			}catch(SQLException se){
+				se.printStackTrace();
+			}//end finally try
+		}
+		return result;
+
+	}
+	public void deleteKeyType(String type, int companyPrefix, int ref){
+
+		Connection conn = null;
+		Statement stmt = null;
+		try{
+			//STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			System.out.println("Creating statement...");
+			stmt = conn.createStatement();
+			String sql;
+			
+			sql = "Select * from keyType where type='"+type+"' and companyPrefix="+companyPrefix+" and ref="+ref;
+			
+			stmt.execute(sql);
+			ResultSet rs=stmt.getResultSet();
+			
+			int row=0;
+			if(rs.last()){
+				row=rs.getRow();
+			}
+			
+			if(row > 0){
+				//type varchar(100),companyPrefix int, ref int, assigned int
+				sql = "delete from keyType where type='"+type+"' and companyPrefix="+companyPrefix+" and ref="+ref;
+
+				stmt.executeUpdate(sql);
+				System.out.println("deleted");
 			}
 			
 			
@@ -452,4 +708,49 @@ public class Persist {
 		}
 
 	}
+	
+	public boolean isIdExist(String id){
+		
+		boolean existance=false;
+		Connection conn = null;
+		Statement stmt = null;
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			stmt = conn.createStatement();
+			String sql;
+			sql = "Select * from slave where id='"+id+"'";
+
+			stmt.execute(sql);
+			ResultSet rs=stmt.getResultSet();
+			while (rs.next ()){
+				existance=true;
+			}
+
+			stmt.close();
+			conn.close();
+		}catch(SQLException se){
+			//Handle errors for JDBC
+			se.printStackTrace();
+		}catch(Exception e){
+			//Handle errors for Class.forName
+			e.printStackTrace();
+		}finally{
+			//finally block used to close resources
+			try{
+				if(stmt!=null)
+					stmt.close();
+			}catch(SQLException se2){
+			}// nothing we can do
+			try{
+				if(conn!=null)
+					conn.close();
+			}catch(SQLException se){
+				se.printStackTrace();
+			}//end finally try
+		}
+		
+		return existance;
+	}
 }
+
