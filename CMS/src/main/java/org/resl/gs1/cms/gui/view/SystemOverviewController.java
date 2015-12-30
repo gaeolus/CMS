@@ -136,7 +136,7 @@ public class SystemOverviewController {
 				"No, nor for my constant heart,\n" +
 				"For these may fail, or turn to ill.\n" +
 				"So thou and I must sever.\n" +
-				"Keep therefore a true woman’s eye,\n" +
+				"Keep therefore a true woman’s eye just to increase the length of the line,\n" +
 				"And love me still, but know not why,\n" +
 				"So hast thou the same reason still\n" +
 				"To doat upon me ever.";
