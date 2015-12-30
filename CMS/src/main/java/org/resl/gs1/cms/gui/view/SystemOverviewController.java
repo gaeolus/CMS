@@ -86,18 +86,18 @@ public class SystemOverviewController {
 			alert.showAndWait();
 		}
 	}
-	
+
 	/**
 	 * Called when the user clicks the new button. Opens a dialog to edit
 	 * details for a new person.
 	 */
 	@FXML
 	private void handleNewCode() {
-	    GS1Code tempCode = new GS1Code();
-	    boolean okClicked = mainApp.showCodeEditDialog(tempCode);
-	    if (okClicked) {
-	        mainApp.getCodeData().add(tempCode);
-	    }
+		GS1Code tempCode = new GS1Code();
+		boolean okClicked = mainApp.showCodeEditDialog(tempCode);
+		if (okClicked) {
+			mainApp.getCodeData().add(tempCode);
+		}
 	}
 
 	/**
@@ -106,21 +106,40 @@ public class SystemOverviewController {
 	 */
 	@FXML
 	private void handleEditCode() {
-	    GS1Code selectedCode = systemTable.getSelectionModel().getSelectedItem();
-	    if (selectedCode != null) {
-	        boolean okClicked = mainApp.showCodeEditDialog(selectedCode);
-	        if (okClicked) {
-	        }
+		GS1Code selectedCode = systemTable.getSelectionModel().getSelectedItem();
+		if (selectedCode != null) {
+			boolean okClicked = mainApp.showCodeEditDialog(selectedCode);
+			if (okClicked) {
+			}
 
-	    } else {
-	        // Nothing selected.
-	        Alert alert = new Alert(AlertType.WARNING);
-	        alert.initOwner(mainApp.getPrimaryStage());
-	        alert.setTitle("No Selection");
-	        alert.setHeaderText("No Code Selected");
-	        alert.setContentText("Please select a code in the table.");
+		} else {
+			// Nothing selected.
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setTitle("No Selection");
+			alert.setHeaderText("No Code Selected");
+			alert.setContentText("Please select a code in the table.");
 
-	        alert.showAndWait();
-	    }
+			alert.showAndWait();
+		}
+	}
+
+	/**
+	 * Called when the user clicks the history button. Opens a dialog to show
+	 * history details of the system.
+	 */
+	@FXML
+	private void handleHistoryCode() {
+		String history = "Love not me for comely grace,\n" +
+				"For my pleasing eye or face,\n" +
+				"Nor for any outward part,\n" +
+				"No, nor for my constant heart,\n" +
+				"For these may fail, or turn to ill.\n" +
+				"So thou and I must sever.\n" +
+				"Keep therefore a true woman’s eye,\n" +
+				"And love me still, but know not why,\n" +
+				"So hast thou the same reason still\n" +
+				"To doat upon me ever.";
+		mainApp.showHistoryEditDialog(history);
 	}
 }

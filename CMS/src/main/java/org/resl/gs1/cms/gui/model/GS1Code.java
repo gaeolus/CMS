@@ -11,11 +11,6 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
- * Model class for a Person.
- *
- * @author Minh
- */
 
 public class GS1Code {
 	

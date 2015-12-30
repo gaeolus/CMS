@@ -17,7 +17,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="500.0" layoutY="261.0" mnemonicParsing="false" text="Show History" />
+      <Button layoutX="500.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleHistoryCode" text="Show History" />
       <Button layoutX="362.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleEditCode" prefHeight="25.0" prefWidth="59.0" text="Edit" />
       <Button layoutX="291.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleNewCode" prefHeight="25.0" prefWidth="59.0" text="New" />
       <Button layoutX="432.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleDeleteCode" prefHeight="25.0" prefWidth="59.0" text="Delete" />
