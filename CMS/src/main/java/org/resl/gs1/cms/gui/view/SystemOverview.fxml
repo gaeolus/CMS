@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.resl.gs1.cms.gui.view.SystemOverviewController">
+   <children>
+      <TableView fx:id="systemTable" layoutX="154.0" layoutY="50.0" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="codeColumn" prefWidth="75.0" text="Code Type" />
+          <TableColumn fx:id="prefixColumn" prefWidth="75.0" text="Company Prefix" />
+            <TableColumn fx:id="referenceColumn" prefWidth="75.0" text="Item/Local/Service Reference" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Button layoutX="500.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleHistoryCode" text="Show History" />
+      <Button layoutX="362.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleEditCode" prefHeight="25.0" prefWidth="59.0" text="Edit" />
+      <Button layoutX="291.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleNewCode" prefHeight="25.0" prefWidth="59.0" text="New" />
+      <Button layoutX="432.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleDeleteCode" prefHeight="25.0" prefWidth="59.0" text="Delete" />
+   </children>
+</AnchorPane>

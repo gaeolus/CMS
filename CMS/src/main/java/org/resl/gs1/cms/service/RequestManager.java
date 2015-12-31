@@ -55,7 +55,7 @@ public class RequestManager {
 					persist.insertIntoAssignment(slaveId,keyType, from, to, httpservlet.getRemoteAddr(),time);
 				}
 				if(keyType.equals("gsrn")){
-					String from="urn:epc:id:gsrn:"+prefix+"."+0+ref+".";
+					String from="urn:epc:id:gsrn:"+prefix+"."+ref;
 					assigned+=range;
 					String to=""+range;
 					resp.setFrom(from);
