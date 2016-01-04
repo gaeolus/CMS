@@ -1,20 +1,21 @@
 package org.resl.cms.CMS_Slave.gui.view;
 
-import org.resl.cms.CMS_Slave.gui.model.Config;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class ConfigEditDialogController {
+
+public class RequestDialogController {
 
     @FXML
-    private TextField configField;
+    private TextField typeField;
+    @FXML
+    private TextField amountField;
+
 
     private Stage dialogStage;
-    private Config config;
     private boolean okClicked = false;
 
     /**
@@ -33,16 +34,6 @@ public class ConfigEditDialogController {
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
-
-    /**
-     * Sets the person to be edited in the dialog.
-     * 
-     * @param person
-     */
-    public void setConfig(Config config) {
-        this.config = config;
-    }
-
     /**
      * Returns true if the user clicked OK, false otherwise.
      * 
@@ -53,12 +44,14 @@ public class ConfigEditDialogController {
     }
 
     /**
-     * Called when the user clicks ok.
+     * Called when the user clicks request.
      */
     @FXML
-    private void handleOk() {
+    private void handleRequest() {
         if (isInputValid()) {
-        	config.setValue(configField.getText());
+            System.out.println("Request clicked!");
+            System.out.println("Type: " + typeField.getText());
+            System.out.println("Amount: " + amountField.getText());
 
             okClicked = true;
             dialogStage.close();
@@ -81,8 +74,10 @@ public class ConfigEditDialogController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (configField.getText() == null || configField.getText().length() == 0) {
-            errorMessage += "No valid configuration!\n"; 
+        if (typeField.getText() == null || typeField.getText().length() == 0) {
+            errorMessage += "No valid type!\n"; 
+        } else if (amountField.getText() == null || amountField.getText().length() == 0) {
+            errorMessage += "No valid amount!\n"; 
         }
 
         if (errorMessage.length() == 0) {

@@ -76,4 +76,43 @@ public class ConfigOverviewController {
             alert.showAndWait();
         }
     }
+    
+    /**
+	 * Called when the user clicks the registration button. Opens a dialog to show
+	 * history details of the system.
+	 */
+	@FXML
+	private void handleRegistration() {
+		String status = "Registration completed!";
+		mainApp.showStatus(status);
+	}
+	
+	/**
+	 * Called when the user clicks the issue button. Opens a dialog to show
+	 * history details of the system.
+	 */
+	@FXML
+	private void handleIssue() {
+		String status = "Issue completed!";
+		mainApp.showStatus(status);
+	}
+	
+	/**
+	 * Called when the user clicks the issue button. Opens a dialog to show
+	 * history details of the system.
+	 */
+	@FXML
+	private void handleHistory() {
+		String history = "History view!";
+		mainApp.showStatus(history);
+	}
+	
+	/**
+	 * Called when the user clicks the new button. Opens a dialog to edit
+	 * details for a new person.
+	 */
+	@FXML
+	private void handleRequest() {
+	    boolean okClicked = mainApp.showRequestDialog();
+	}
 }

@@ -5,14 +5,17 @@ import java.io.IOException;
 import org.resl.cms.CMS_Slave.gui.model.Config;
 import org.resl.cms.CMS_Slave.gui.view.ConfigEditDialogController;
 import org.resl.cms.CMS_Slave.gui.view.ConfigOverviewController;
+import org.resl.cms.CMS_Slave.gui.view.RequestDialogController;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -140,6 +143,101 @@ public class MainApp extends Application {
 	        ConfigEditDialogController controller = loader.getController();
 	        controller.setDialogStage(dialogStage);
 	        controller.setConfig(config);
+
+	        // Show the dialog and wait until the user closes it
+	        dialogStage.showAndWait();
+
+	        return controller.isOkClicked();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+	
+	/**
+	 * Opens a dialog to show history. The dialog is shown until
+	 * the user closes it.
+	 * 
+	 * @param person the person object to be edited
+	 */
+	public void showStatus(String status){
+		try{			
+			Label label = new Label(status);
+			label.setWrapText(true);
+			label.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 20; -fx-text-fill: black;");
+
+			StackPane layout = new StackPane();
+			layout.setStyle("-fx-background-color: white; -fx-padding: 10;");
+			layout.getChildren().setAll(label);
+			
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Status");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(layout);
+			dialogStage.setScene(scene);
+			
+			dialogStage.showAndWait();			
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Opens a dialog to show history. The dialog is shown until
+	 * the user closes it.
+	 * 
+	 * @param person the person object to be edited
+	 */
+	public void showHistory(String history){
+		try{			
+			Label label = new Label(history);
+			label.setWrapText(true);
+			label.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 20; -fx-text-fill: black;");
+
+			StackPane layout = new StackPane();
+			layout.setStyle("-fx-background-color: white; -fx-padding: 10;");
+			layout.getChildren().setAll(label);
+			
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("History");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(layout);
+			dialogStage.setScene(scene);
+			
+			dialogStage.showAndWait();			
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Opens a dialog to edit details for the specified person. If the user
+	 * clicks OK, the changes are saved into the provided person object and true
+	 * is returned.
+	 * 
+	 * @param person the person object to be edited
+	 * @return true if the user clicked OK, false otherwise.
+	 */
+	public boolean showRequestDialog() {
+	    try {
+	        // Load the fxml file and create a new stage for the popup dialog.
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(MainApp.class.getResource("view/RequestDialog.fxml"));
+	        AnchorPane page = (AnchorPane) loader.load();
+
+	        // Create the dialog Stage.
+	        Stage dialogStage = new Stage();
+	        dialogStage.setTitle("Code Request");
+	        dialogStage.initModality(Modality.WINDOW_MODAL);
+	        dialogStage.initOwner(primaryStage);
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+
+	        // Set the person into the controller.
+	        RequestDialogController controller = loader.getController();
+	        controller.setDialogStage(dialogStage);
 
 	        // Show the dialog and wait until the user closes it
 	        dialogStage.showAndWait();
