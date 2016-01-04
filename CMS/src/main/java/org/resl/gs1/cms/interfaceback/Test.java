@@ -9,7 +9,7 @@ public class Test {
 //		String EPCURI=interfaceBack.GS1StringToEPCURI(gs1String);
 //		System.out.println(EPCURI);
 		
-		interfaceBack.configure(112345, 2345, 0, 0);
+		interfaceBack.add(112345, 2345, 0, 0);
 		System.out.println("Test End");
 	}
 
