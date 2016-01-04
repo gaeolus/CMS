@@ -185,6 +185,9 @@ public class InterfaceBack {
 					if(keyStatus.getLeft()>0){
 						if(keyType.getType().equals("gtin")){
 							String[] output =keyStatus.getIdFrom().split(":");
+							for (int i=0; i<output.length; i++){
+								System.out.println("output number " + i + ": " + output[i]);
+							}
 							EPC+=output[0]+":"+output[1]+":"+output[2]+":"+output[3]+":";
 							output=output[4].split("\\.");
 							String companyPrefix=output[0];

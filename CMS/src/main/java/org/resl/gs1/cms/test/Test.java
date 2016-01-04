@@ -11,10 +11,10 @@ public class Test {
 	public static void main(String[] args) {
 		Persist persist=new Persist();
 		//persist.test();
-		//persist.dropTbales();
-		//persist.dropDatabase();
-		//persist.createDatabase();
-		//persist.createTables();
+		persist.dropTables();
+		persist.dropDatabase();
+		persist.createDatabase();
+		persist.createTables();
 		//persist.insertIntoKeyType("gtin", 12, 1201);
 		//persist.deleteKeyType("gtin", 12, 1201);
 		//System.out.println(persist.selectFromKeyType("gtin", 10, 1201));
@@ -32,7 +32,7 @@ public class Test {
 //		if(persist.isIdExist("12"))
 //			System.out.println("Id existes");
 		
-		String format="urn:epc:id:sgtin:120.01201.111";
+		/*String format="urn:epc:id:sgtin:120.01201.111";
 		String GS1ElementString="";
 		if(format.contains(".") && format.contains(":")){
 			
@@ -71,7 +71,7 @@ public class Test {
 		System.out.println(check);
 		GS1ElementString+="(01) "+companyPrefix+" "+indicator+" "+ref+" "+indicator+" "+check+" (21) "+serial;
 		System.out.println(GS1ElementString);
-		System.out.println(output[0]+output[1]);
+		System.out.println(output[0]+output[1]);*/
 	}
 
 }

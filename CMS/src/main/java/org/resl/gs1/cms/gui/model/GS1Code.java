@@ -28,6 +28,10 @@ public class GS1Code {
 		this.reference = new SimpleStringProperty(reference);
 	}
 	
+	public String toString(){
+		return (codeType.toString() + "," + prefix.toString() + "," + reference.toString());
+	}
+	
 	public String getCodeType(){
 		return codeType.get();
 	}

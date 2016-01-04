@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 
 import org.resl.gs1.cms.gui.MainApp;
 import org.resl.gs1.cms.gui.model.GS1Code;
+import org.resl.gs1.cms.interfaceback.InterfaceBack;
 
 public class SystemOverviewController {
 	@FXML
@@ -72,6 +73,22 @@ public class SystemOverviewController {
 	 */
 	@FXML
 	private void handleDeleteCode() {
+		GS1Code code = systemTable.getSelectionModel().getSelectedItem();
+		InterfaceBack interfaceBack=new InterfaceBack();
+    	if (code.getCodeType().equals("GTIN")){
+    		interfaceBack.remove(Integer.parseInt(code.getPrefix()), Integer.parseInt(code.getReference()), 0, 0);
+    	}else if (code.getCodeType().equals("GLN")){
+    		interfaceBack.remove(Integer.parseInt(code.getPrefix()), 0, Integer.parseInt(code.getReference()), 0);
+    	}else if (code.getCodeType().equals("GSRN")){
+    		interfaceBack.remove(Integer.parseInt(code.getPrefix()), 0, 0, Integer.parseInt(code.getReference()));
+    	}else{
+    		System.out.println("Code type invalid (need to be GTIN, GLN, or GSRN");
+    	}
+		
+		/*GS1Code code = systemTable.getSelectionModel().getSelectedItem();
+		System.out.println(code.getCodeType());
+		System.out.println(code.getPrefix());
+		System.out.println(code.getReference());*/		
 		int selectedIndex = systemTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
 			systemTable.getItems().remove(selectedIndex);
@@ -110,6 +127,17 @@ public class SystemOverviewController {
 		if (selectedCode != null) {
 			boolean okClicked = mainApp.showCodeEditDialog(selectedCode);
 			if (okClicked) {
+				GS1Code code = systemTable.getSelectionModel().getSelectedItem();
+				InterfaceBack interfaceBack=new InterfaceBack();
+		    	if (code.getCodeType().equals("GTIN")){
+		    		interfaceBack.remove(Integer.parseInt(code.getPrefix()), Integer.parseInt(code.getReference()), 0, 0);
+		    	}else if (code.getCodeType().equals("GLN")){
+		    		interfaceBack.remove(Integer.parseInt(code.getPrefix()), 0, Integer.parseInt(code.getReference()), 0);
+		    	}else if (code.getCodeType().equals("GSRN")){
+		    		interfaceBack.remove(Integer.parseInt(code.getPrefix()), 0, 0, Integer.parseInt(code.getReference()));
+		    	}else{
+		    		System.out.println("Code type invalid (need to be GTIN, GLN, or GSRN");
+		    	}
 			}
 
 		} else {
@@ -130,7 +158,9 @@ public class SystemOverviewController {
 	 */
 	@FXML
 	private void handleHistoryCode() {
-		String history = "Love not me for comely grace,\n" +
+		InterfaceBack interfaceBack = new InterfaceBack();
+		String history = interfaceBack.history();
+		/*String history = "Love not me for comely grace,\n" +
 				"For my pleasing eye or face,\n" +
 				"Nor for any outward part,\n" +
 				"No, nor for my constant heart,\n" +
@@ -139,7 +169,7 @@ public class SystemOverviewController {
 				"Keep therefore a true woman’s eye just to increase the length of the line,\n" +
 				"And love me still, but know not why,\n" +
 				"So hast thou the same reason still\n" +
-				"To doat upon me ever.";
+				"To doat upon me ever.";*/
 		mainApp.showHistoryEditDialog(history);
 	}
 }

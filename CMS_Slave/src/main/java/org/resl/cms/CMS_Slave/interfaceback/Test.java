@@ -13,7 +13,7 @@ public class Test {
 
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
 		//this variables must be assigned from interface values
-		String  ip ="192.168.56.1";
+		String  ip ="192.168.0.2";
 	    String port = "8080";
 	    String bizLocation = "bizLocation1";
 		String writePoint = "writePoint1";

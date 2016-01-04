@@ -1,6 +1,7 @@
 package org.resl.gs1.cms.gui.view;
 
 import org.resl.gs1.cms.gui.model.GS1Code;
+import org.resl.gs1.cms.interfaceback.InterfaceBack;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -66,6 +67,17 @@ public class CodeEditDialogController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
+        	InterfaceBack interfaceBack=new InterfaceBack();
+        	if (codeField.getText().trim().equals("GTIN")){
+        		interfaceBack.add(Integer.parseInt(prefixField.getText()), Integer.parseInt(referenceField.getText()), 0, 0);
+        	}else if (codeField.getText().trim().equals("GLN")){
+        		interfaceBack.add(Integer.parseInt(prefixField.getText()), 0, Integer.parseInt(referenceField.getText()), 0);
+        	}else if (codeField.getText().trim().equals("GSRN")){
+        		interfaceBack.add(Integer.parseInt(prefixField.getText()), 0, 0, Integer.parseInt(referenceField.getText()));
+        	}else{
+        		System.out.println("Code type invalid (need to be GTIN, GLN, or GSRN");
+        	}
+        	
             code.setCodeType(codeField.getText());
             code.setPrefix(prefixField.getText());
             code.setReference(referenceField.getText());

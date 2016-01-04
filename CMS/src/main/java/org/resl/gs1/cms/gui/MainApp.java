@@ -2,6 +2,7 @@ package org.resl.gs1.cms.gui;
 
 import java.io.IOException;
 
+import org.resl.gs1.cms.backend.Persist;
 import org.resl.gs1.cms.gui.model.GS1Code;
 import org.resl.gs1.cms.gui.view.CodeEditDialogController;
 import org.resl.gs1.cms.gui.view.SystemOverviewController;
@@ -82,6 +83,11 @@ public class MainApp extends Application {
 	}
 
 	public static void main(String[] args) {
+		Persist persist=new Persist();
+		persist.dropTables();
+		persist.dropDatabase();
+		persist.createDatabase();
+		persist.createTables();
 		launch(args);
 	}
 
@@ -95,9 +101,9 @@ public class MainApp extends Application {
 	 */
 	public MainApp() {
 		// Add some sample data
-		gs1CodeData.add(new GS1Code("GTIN", "1234", "1234"));
+		/*gs1CodeData.add(new GS1Code("GTIN", "1234", "1234"));
 		gs1CodeData.add(new GS1Code("GLN", "something", "1234"));
-		gs1CodeData.add(new GS1Code("GSRN", "hello", "how r u"));
+		gs1CodeData.add(new GS1Code("GSRN", "hello", "how r u"));*/
 	}
 
 	/**
