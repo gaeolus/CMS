@@ -4,6 +4,8 @@ import org.resl.cms.CMS_Slave.gui.MainApp;
 import org.resl.cms.CMS_Slave.gui.model.Config;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -52,5 +54,26 @@ public class ConfigOverviewController {
 
         // Add observable list data to the table
         configTable.setItems(mainApp.getConfigData());
+    }
+    
+    /**
+     * Called when the user clicks the edit button. Opens a dialog to edit
+     * details for the selected person.
+     */
+    @FXML
+    private void handleEditConfig() {
+        Config selectedConfig = configTable.getSelectionModel().getSelectedItem();
+        if (selectedConfig != null) {
+            boolean okClicked = mainApp.showConfigEditDialog(selectedConfig);
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Config Selected");
+            alert.setContentText("Please select a configuration in the table.");
+
+            alert.showAndWait();
+        }
     }
 }

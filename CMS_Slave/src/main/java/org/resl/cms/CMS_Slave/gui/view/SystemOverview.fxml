@@ -8,17 +8,17 @@
 
 <AnchorPane prefHeight="266.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.resl.cms.CMS_Slave.gui.view.ConfigOverviewController">
    <children>
-      <Button layoutX="152.0" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Registration">
+      <Button layoutX="214.0" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Registration">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="284.0" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="History">
+      <Button layoutX="327.0" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="History">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <SplitMenuButton layoutX="22.0" layoutY="230.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="25.0" prefWidth="107.0" text="ID Request">
+      <SplitMenuButton layoutX="98.0" layoutY="230.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="25.0" prefWidth="102.0" text="ID Request">
         <items>
           <MenuItem mnemonicParsing="false" text="GTIN" />
           <MenuItem mnemonicParsing="false" text="SGLN" />
@@ -37,5 +37,10 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Button layoutX="14.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleEditConfig" prefHeight="25.0" prefWidth="71.0" text="Edit">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
