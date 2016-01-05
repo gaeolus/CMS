@@ -113,11 +113,12 @@ public class ConfigOverviewController {
 	 */
 	@FXML
 	private void handleIssue() {
-		InterfaceBack back = new InterfaceBack();
+		/*InterfaceBack back = new InterfaceBack();
 		KeyType key=new KeyType("gtin",Integer.parseInt(valueColumn.getCellData(4)),Integer.parseInt(valueColumn.getCellData(5)));
 		
 		String status=back.issue(key);
-		mainApp.showStatus(status);
+		mainApp.showStatus(status);*/
+		boolean okClicked = mainApp.showIssueDialog();		
 	}
 	
 	/**
