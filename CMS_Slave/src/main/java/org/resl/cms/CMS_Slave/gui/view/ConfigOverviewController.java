@@ -2,6 +2,8 @@ package org.resl.cms.CMS_Slave.gui.view;
 
 import org.resl.cms.CMS_Slave.gui.MainApp;
 import org.resl.cms.CMS_Slave.gui.model.Config;
+import org.resl.cms.CMS_Slave.interfaceback.InterfaceBack;
+import org.resl.cms.CMS_Slave.model.KeyType;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -17,7 +19,8 @@ public class ConfigOverviewController {
     private TableColumn<Config, String> configColumn;
     @FXML
     private TableColumn<Config, String> valueColumn;
-
+     
+    public static TableColumn<Config, String> valueColumncopy;
     @FXML
     private Label configLabel;
     @FXML
@@ -30,7 +33,11 @@ public class ConfigOverviewController {
      * The constructor.
      * The constructor is called before the initialize() method.
      */
-    public ConfigOverviewController() {
+    public ConfigOverviewController() {   	
+    }
+    
+    public static TableColumn<Config, String> getValueColumn(){
+    	return valueColumncopy;
     }
 
     /**
@@ -42,6 +49,7 @@ public class ConfigOverviewController {
         // Initialize the person table with the two columns.
         configColumn.setCellValueFactory(cellData -> cellData.getValue().configurationProperty());
         valueColumn.setCellValueFactory(cellData -> cellData.getValue().valueProperty());
+        valueColumncopy = valueColumn;
     }
 
     /**
@@ -83,8 +91,20 @@ public class ConfigOverviewController {
 	 */
 	@FXML
 	private void handleRegistration() {
-		String status = "Registration completed!";
-		mainApp.showStatus(status);
+		try{
+			InterfaceBack back=new InterfaceBack();
+			String ip = valueColumn.getCellData(0);
+			String port = valueColumn.getCellData(1);
+			String bizLocation = valueColumn.getCellData(2);
+			String writePoint = valueColumn.getCellData(3);
+			back.configure(ip, port, bizLocation, writePoint);
+			String status=back.register();
+			
+			mainApp.showStatus(status);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/**
@@ -93,22 +113,35 @@ public class ConfigOverviewController {
 	 */
 	@FXML
 	private void handleIssue() {
-		String status = "Issue completed!";
+		InterfaceBack back = new InterfaceBack();
+		KeyType key=new KeyType("gtin",Integer.parseInt(valueColumn.getCellData(4)),Integer.parseInt(valueColumn.getCellData(5)));
+		
+		String status=back.issue(key);
 		mainApp.showStatus(status);
 	}
 	
 	/**
-	 * Called when the user clicks the issue button. Opens a dialog to show
+	 * Called when the user clicks the history button. Opens a dialog to show
 	 * history details of the system.
 	 */
 	@FXML
 	private void handleHistory() {
-		String history = "History view!";
+		//String history = "History view!";
+		InterfaceBack back = new InterfaceBack();
+		System.out.println(back.historyGeneralLog());
+		System.out.println(back.historySpecificLog());
+		String history = back.historyGeneralLog() + "\n" + back.historySpecificLog();
+		
+		/*System.out.println("GeneralLog History");
+		status=back.historyGeneralLog();
+		System.out.println(status);
+		System.out.println("SpecificLog History");
+		status=back.historySpecificLog();*/
 		mainApp.showStatus(history);
 	}
 	
 	/**
-	 * Called when the user clicks the new button. Opens a dialog to edit
+	 * Called when the user clicks the request button. Opens a dialog to edit
 	 * details for a new person.
 	 */
 	@FXML

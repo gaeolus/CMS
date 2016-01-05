@@ -144,7 +144,7 @@ public class InterfaceBack {
 						Timestamp time=new Timestamp(date.getTime());
 						persist.insertIntoSpecificLog(keyType.getType(), EPC, time);
 						status+="EPC URI FORM: "+EPC+"\n";
-						status+="GS! ELEMENT STRING FORM: "+EPCURIToGS1String(EPC);
+						status+="GS1 ELEMENT STRING FORM: "+EPCURIToGS1String(EPC);
 					}else if(keyType.getType().equals("gln")){
 						String[] output =keyStatus.getIdFrom().split(":");
 						EPC+=output[0]+":"+output[1]+":"+output[2]+":"+output[3]+":";
@@ -159,7 +159,7 @@ public class InterfaceBack {
 						Timestamp time=new Timestamp(date.getTime());
 						persist.insertIntoSpecificLog(keyType.getType(), EPC, time);
 						status+="EPC URI FORM: "+EPC+"\n";
-						status+="GS! ELEMENT STRING FORM: "+EPCURIToGS1String(EPC);
+						status+="GS1 ELEMENT STRING FORM: "+EPCURIToGS1String(EPC);
 					}else if(keyType.getType().equals("gsrn")){
 						EPC+=keyStatus.getIdFrom();
 						persist.updatekeyStatus(keyType,keyStatus.getLeft(),EPC);

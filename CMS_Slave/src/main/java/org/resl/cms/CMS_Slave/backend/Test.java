@@ -6,9 +6,9 @@ public class Test {
 
 	public static void main(String[] args) {
 		Persist persist=new Persist();
-		persist.dropeDatabase();
+		persist.dropDatabase();
 		persist.createDatabase();
-		persist.createTbales();
+		persist.createTable();
 		//Account account=new Account();
 		//account.setId("Test id");
 		//account.setBizLocation("TestBiz");

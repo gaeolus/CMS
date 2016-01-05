@@ -590,7 +590,7 @@ public class Persist {
           
        }
      
-      public void createTbales(){
+      public void createTable(){
           
            Connection conn = null;
            Statement stmt = null;
@@ -687,7 +687,7 @@ public class Persist {
           
        }
      
-      public void dropeDatabase(){
+      public void dropDatabase(){
           
            Connection conn = null;
            Statement stmt = null;

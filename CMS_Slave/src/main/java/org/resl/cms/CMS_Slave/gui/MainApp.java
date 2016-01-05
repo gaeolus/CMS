@@ -2,6 +2,7 @@ package org.resl.cms.CMS_Slave.gui;
 
 import java.io.IOException;
 
+import org.resl.cms.CMS_Slave.backend.Persist;
 import org.resl.cms.CMS_Slave.gui.model.Config;
 import org.resl.cms.CMS_Slave.gui.view.ConfigEditDialogController;
 import org.resl.cms.CMS_Slave.gui.view.ConfigOverviewController;
@@ -36,14 +37,14 @@ public class MainApp extends Application {
      */
     public MainApp() {
         // Add some sample data
-    	configData.add(new Config("Server IP", "1234"));
-    	configData.add(new Config("Server Port", "1234"));
-    	configData.add(new Config("Business Location", "1234"));
-    	configData.add(new Config("Write Point", "1234"));
-    	configData.add(new Config("Company Prefix", "1234"));
-    	configData.add(new Config("Item Reference", "1234"));
-    	configData.add(new Config("Location Reference", "1234"));
-    	configData.add(new Config("Service Reference", "1234"));
+    	configData.add(new Config("Server IP", "192.168.0.2"));
+    	configData.add(new Config("Server Port", "8080"));
+    	configData.add(new Config("Business Location", "KAIST"));
+    	configData.add(new Config("Write Point", "N1"));
+    	configData.add(new Config("Company Prefix", "12345"));
+    	configData.add(new Config("Item Reference", "234"));
+    	configData.add(new Config("Location Reference", "345"));
+    	configData.add(new Config("Service Reference", "456"));
     }
 
     /**
@@ -113,6 +114,10 @@ public class MainApp extends Application {
 	}
 
 	public static void main(String[] args) {
+		Persist persist=new Persist();
+		persist.dropDatabase();
+		persist.createDatabase();
+		persist.createTable();
 		launch(args);
 	}
 	
