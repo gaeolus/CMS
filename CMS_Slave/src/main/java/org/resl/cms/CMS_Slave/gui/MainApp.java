@@ -42,10 +42,10 @@ public class MainApp extends Application {
     	configData.add(new Config("Server Port", "8080"));
     	configData.add(new Config("Business Location", "KAIST"));
     	configData.add(new Config("Write Point", "N1"));
-    	configData.add(new Config("Company Prefix", "12345"));
-    	configData.add(new Config("Item Reference", "234"));
-    	configData.add(new Config("Location Reference", "345"));
-    	configData.add(new Config("Service Reference", "456"));
+    	configData.add(new Config("Company Prefix", "0614141"));
+    	configData.add(new Config("Item Reference", "112345"));
+    	configData.add(new Config("Location Reference", "12345"));
+    	configData.add(new Config("Service Reference", "1234567890"));
     }
 
     /**
@@ -272,7 +272,7 @@ public class MainApp extends Application {
 
 	        // Create the dialog Stage.
 	        Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Edit Person");
+	        dialogStage.setTitle("Code Issue");
 	        dialogStage.initModality(Modality.WINDOW_MODAL);
 	        dialogStage.initOwner(primaryStage);
 	        Scene scene = new Scene(page);
